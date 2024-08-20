@@ -169,9 +169,9 @@
 
 ## 4. 개발 환경
 
-- Front : React, Redux-Toolkit
-- Back-end : SpringBoot, MyBatis
-- DataBase : MYSQL, MONGODB, REDIS, FIREBASE
+- **Front-end** : React, Redux-Toolkit
+- **Back-end** : SpringBoot, MyBatis
+- **DataBase** : MYSQL, MONGODB, REDIS, FIREBASE
 - 버전 및 이슈관리 : Github
 - 협업 툴 : Discord, Figma
 - 서비스 배포 환경 : NCP
