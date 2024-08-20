@@ -26,8 +26,7 @@
 
 | **고규리** | **이도현** | **김민상** | **성연서** | **신상우(팀장)** |
 | :------: |  :------: | :------: | :------: | :------: |
-| [<img src="![규리 사진1](https://github.com/user-attachments/assets/fcbb85e3-4218-4628-8ffd-233213a3c0ec)
-" height=150 width=150> <br/> @yeon1615](https://github.com/gogxxri) | [<img src="사진" height=150 width=150> <br/> @Cheorizzang](https://github.com/bbott0) | [<img src="사진" height=150 width=150> <br/> @heejiyang](https://github.com/satorufan) | [<img src="사진" height=150 width=150> <br/> @journey-ji](https://github.com/aBiteOfPizza) | [<img src="사진" height=150 width=150> <br/> @journey-ji](https://github.com/Coscle) |
+| [<img src="https://avatars.githubusercontent.com/u/164162764?v=4" height=150 width=150> <br/> @yeon1615](https://github.com/gogxxri) | [<img src="https://avatars.githubusercontent.com/u/162306616?v=4" height=150 width=150> <br/> @Cheorizzang](https://github.com/bbott0) | [<img src="https://avatars.githubusercontent.com/u/147994370?v=4" height=150 width=150> <br/> @heejiyang](https://github.com/satorufan) | [<img src="https://avatars.githubusercontent.com/u/170899887?v=4" height=150 width=150> <br/> @journey-ji](https://github.com/aBiteOfPizza) | [<img src="https://avatars.githubusercontent.com/u/108801361?v=4" height=150 width=150> <br/> @journey-ji](https://github.com/Coscle) |
 
 </div>
 
