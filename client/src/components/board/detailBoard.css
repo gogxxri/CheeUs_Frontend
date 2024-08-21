@@ -127,11 +127,12 @@
   }
   
   .detail-video-wrapper {
-    width: 60%;
-    padding-top: calc(100% * 9 / 16);
-    overflow: hidden;
+    width: 100%;
+    padding-top: calc(40% * 16 / 9); 
     position: relative;
+    overflow: hidden; 
   }
+  
   
   .detail-video {
     position: absolute; 
@@ -139,7 +140,7 @@
     left: 0; 
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain; 
     border-radius: 5px;
   }
   

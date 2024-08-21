@@ -271,6 +271,7 @@ const ChatPage = () => {
                                         sendMessage={sendMessage}
                                         setMessageInput={(input) => dispatch(setMessageInput(input))}
                                         activeKey={activeKey}
+                                        removeUserFromTogetherChatRoom={removeUserFromTogetherChatRoom}
                                     />
                                 </div>
                             </div>

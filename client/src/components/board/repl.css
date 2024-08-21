@@ -131,7 +131,7 @@
 }
 
 
-.skeleton-small {
+.skeleton skeleton-small {
     display: inline-block;
     animation: pulse 1.5s infinite ease-in-out;
     width: 20px;

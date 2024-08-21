@@ -197,18 +197,6 @@
     object-fit: contain;
 }
 
-  
-  .card-overlay-text {
-    position: absolute; 
-    bottom: 0; 
-    left: 0;
-    right: 0;
-    background: rgba(0, 0, 0, 0.5); 
-    color: white;
-    padding: 10px;
-    font-size: 1rem; 
-  }
-  
   .content-text {
     padding: 10px; 
     overflow: hidden;

@@ -18,6 +18,7 @@ import BoardSkeleton from '../skeleton/BoardSkeleton';
 import BoardTop from '../board/BoardTop';
 import { selectBoards, toggleLike, selectLikedMap, filterBoards, setSearchQuery, selectFilteredBoards, fetchBoards, selectBoardAuthors, fetchBoardsAuthor } from '../../store/BoardSlice';
 import '../freeboard/freeBoard.css';
+
 const BoardList = ({ category }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -31,23 +32,21 @@ const BoardList = ({ category }) => {
   const itemsPerPage = 8;
   const [currentPage, setCurrentPage] = useState(1);
 
-  // 보드 목록 로딩
   useEffect(() => {
-    if(category == 1){
+    if(category === 1){
         dispatch(fetchBoards('freeboard'));
-    } else if (category == 3){
+    } else if (category === 3){
         dispatch(fetchBoards('eventboard'));
-    } else if (category == 2){
+    } else if (category === 2){
         dispatch(fetchBoards('shortform'));
     }
   }, [dispatch, category]);
 
-  // URL 쿼리에서 검색어를 읽어와 상태에 설정
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     const query = params.get('search') || '';
-    dispatch(setSearchQuery(query)); // 검색어를 상태에 설정
-    dispatch(filterBoards()); // 검색어에 따라 필터링
+    dispatch(setSearchQuery(query));
+    dispatch(filterBoards());
   }, [location.search, dispatch]);
 
   const handleLikeClick = (id) => {
@@ -55,25 +54,24 @@ const BoardList = ({ category }) => {
   };
 
   const handleCardClick = (id) => {
-	const boardData = boards.find(board=>board.id ===id);
-    if(category == 1){
+    const boardData = boards.find(board => board.id === id);
+    if(category === 1){
        navigate(`/board/freeboard/detail/${id}`, {state: {boardData}});
-    } else if (category == 3){
-        navigate(`/board/eventboard/detail/${id}`,{state: {boardData}});
-    } //shortForm.js에서 따로 처리해야함
+    } else if (category === 3){
+        navigate(`/board/eventboard/detail/${id}`, {state: {boardData}});
+    }
   };
 
   const handleCreatePost = () => {
-    if(category == 1) {
+    if(category === 1) {
         navigate(`/board/freeboard/write`);
-    } else if(category == 3) {
+    } else if(category === 3) {
         navigate(`/board/eventboard/write`);
-    } else if(category == 2) {
+    } else if(category === 2) {
         navigate(`/board/shortform/write`);
     }
   };
 
-  // 페이지네이션
   const startIndex = (currentPage - 1) * itemsPerPage;
   const visibleBoards = filteredBoards.filter(board => !board.hidden);
   const pinnedBoards = visibleBoards.filter(board => board.category === category && board.pinned);
@@ -106,48 +104,55 @@ const BoardList = ({ category }) => {
       {filteredBoards[0] !== -1 ? (
       <div className="freeboard-container">
         <div className="freeboard-card-container">
-          {arraysEqualAsSets(Object.keys(authors), perPageAuthors) ? currentBoards.map((board) => (
-            <Card
-              key={board.id}
-              variant="plain"
-              className="freeboard-card"
-              onClick={() => handleCardClick(board.id)}
-            >
-              {board.pinned && (
-                <Box className="pinned-icon-container">
-                  <PushPinIcon className="pinned-icon" />
-                  <Chip label="공지" size="small" className="notice-chip" />
+          {arraysEqualAsSets(Object.keys(authors), perPageAuthors) ? currentBoards.map((board) => {
+
+            const contentWithoutImages = board.content.replace(/!\[.*?\]\(https:\/\/[^\s]+\)/g, '');
+
+            const thumbnailMatch = board.content.match(/!\[.*?\]\((https:\/\/[^\s]+)\)/);
+            const thumbnail = thumbnailMatch ? thumbnailMatch[1] : null;
+
+            return (
+              <Card
+                key={board.id}
+                variant="plain"
+                className="freeboard-card"
+                onClick={() => handleCardClick(board.id)}
+              >
+                {board.pinned && (
+                  <Box className="pinned-icon-container">
+                    <PushPinIcon className="pinned-icon" />
+                    <Chip label="공지" size="small" className="notice-chip" />
+                  </Box>
+                )}
+                <Box className="card-video">
+                  <AspectRatio ratio="4/3">
+                    {thumbnail ? (
+                      <CardCover className="card-cover">
+                        <img
+                          src={thumbnail || board.photoes}
+                          alt="게시물 사진"
+                          className="card-photo"
+                          style={{ width: '100%', height: 'auto', objectFit: 'contain' }} 
+                        />
+                        <div className="card-overlay-text">
+                          {contentWithoutImages}
+                        </div>
+                      </CardCover>
+                    ) : (
+                        <div className="content-text">
+                          <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>
+                            {contentWithoutImages}
+                          </ReactMarkdown>
+                        </div>
+                    )}
+                  </AspectRatio>
                 </Box>
-              )}
-              <Box className="card-video">
-                <AspectRatio ratio="4/3">
-                  {board.photoes ? (
-                    <CardCover className="card-cover">
-                      <img
-                        src={board.photoes}
-                        alt="게시물 사진"
-                        className="card-photo"
-                        style={{ width: '100%', height: 'auto', objectFit: 'contain' }} 
-                      />
-                      <div className="card-overlay-text">
-                        {board.content}
-                      </div>
-                    </CardCover>
-                  ) : (
-                      <div className="content-text">
-                       <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>
-                          {board.content}
-                        </ReactMarkdown>
-                      </div>
-                  )}
-                </AspectRatio>
-              </Box>
-              <Box>
-                <div className="freeboard-title">
-                  {board.title}
-                </div>
-              </Box>
-              <Box className="card-content">
+                <Box>
+                  <div className="freeboard-title">
+                    {board.title}
+                  </div>
+                </Box>
+                <Box className="card-content">
                   <div className="nick-avature">
                     <Avatar
                       src={authors[board.author_id]}
@@ -162,18 +167,19 @@ const BoardList = ({ category }) => {
                     </div>
                   </div>
                   <div className="card-icons-container-list">
-                  <div className="card-icon">
-                    <Favorite color="action" />
-                    {board.like}
-                  </div>
-                  <div className="card-icon">
-                    <Visibility />
-                    {board.views}
-                  </div>
+                    <div className="card-icon">
+                      <Favorite color="action" />
+                      {board.like}
+                    </div>
+                    <div className="card-icon">
+                      <Visibility />
+                      {board.views}
+                    </div>
                   </div>
                 </Box>
-            </Card>
-          )) : <BoardSkeleton />}
+              </Card>
+            );
+          }) : <BoardSkeleton />}
         </div>
       </div>) : (<div className="permissionMessage" >
           <p>게시글이 존재하지 않습니다.<br/> 첫 게시글의 주인공이 되어 보세요~!</p>

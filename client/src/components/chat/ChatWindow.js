@@ -21,6 +21,7 @@ const ChatWindow = ({
     formatMessageTime,
     sendMessage,
     setMessageInput,
+    removeUserFromTogetherChatRoom,
     activeKey,
 }) => {
     const navigate = useNavigate(); 
@@ -73,7 +74,7 @@ const ChatWindow = ({
             }
         }
         scrollToBottom();
-    }, [selectedChat, activeKey]);
+    }, [selectedChat, activeKey, removeUserFromTogetherChatRoom]);
 
 
     const scrollToBottom = () => {
