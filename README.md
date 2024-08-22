@@ -9,11 +9,6 @@
 >
 > [Back-end  GitHub](https://github.com/Coscle/CheeUs_Backend)
 
-  
-
-- admin ID : adminGR
-- admin PW : adminGR
-
 <br>
 
 ## 1. 프로젝트 소개
